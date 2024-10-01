@@ -1,59 +1,30 @@
 package com.example.restaurantapi.model;
 
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-// Assuming Geolocation is another model in your project
-// You need to define this or import if using an external library
-class Geolocation {
-    private double latitude;
-    private double longitude;
-
-    public Geolocation() {
-    }
-
-    public Geolocation(double latitude, double longitude) {
-        this.latitude = latitude;
-        this.longitude = longitude;
-    }
-
-    public double getLatitude() {
-        return latitude;
-    }
-
-    public void setLatitude(double latitude) {
-        this.latitude = latitude;
-    }
-
-    public double getLongitude() {
-        return longitude;
-    }
-
-    public void setLongitude(double longitude) {
-        this.longitude = longitude;
-    }
-
-    @Override
-    public String toString() {
-        return "Geolocation{" +
-                "latitude=" + latitude +
-                ", longitude=" + longitude +
-                '}';
-    }
-}
-
+@Data
 @Document(collection = "restaurants")
 public class Restaurant {
 
     @Id
     private String id;
+
+    @NotNull(message = "Name is required")
+    @Size(min = 2, max = 100, message = "Name should be between 2 and 100 characters")
     private String name;
+
+    @NotNull(message = "Address is required")
+    @Size(min = 10, max = 255, message = "Address should be between 10 and 255 characters")
     private String address;
+
     private Geolocation geolocation;
 
     // Constructors
-    public Restaurant() {
-    }
+    public Restaurant() {}
 
     public Restaurant(String id, String name, String address, Geolocation geolocation) {
         this.id = id;
@@ -102,6 +73,44 @@ public class Restaurant {
                 ", name='" + name + '\'' +
                 ", address='" + address + '\'' +
                 ", geolocation=" + geolocation +
+                '}';
+    }
+}
+
+class Geolocation {
+    private double latitude;
+    private double longitude;
+
+    // Constructors
+    public Geolocation() {}
+
+    public Geolocation(double latitude, double longitude) {
+        this.latitude = latitude;
+        this.longitude = longitude;
+    }
+
+    // Getters and Setters
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
+    }
+
+    @Override
+    public String toString() {
+        return "Geolocation{" +
+                "latitude=" + latitude +
+                ", longitude=" + longitude +
                 '}';
     }
 }
