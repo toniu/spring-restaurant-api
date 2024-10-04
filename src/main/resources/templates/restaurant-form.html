@@ -3,7 +3,7 @@
 
 <head>
     <title th:text="${restaurant.id} != null ? 'Edit Restaurant' : 'Create Restaurant'"></title>
-    <link href="../static/css/output.css" rel="stylesheet"> <!-- Assuming Tailwind or another CSS framework -->
+    <link th:href="@{/main.css}" rel="stylesheet">
 </head>
 
 <body>

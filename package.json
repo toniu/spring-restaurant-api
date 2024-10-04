@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tailwindcss -i ./src/main/tailwind/styles.css -o ./src/main/resources/static/main.css",
+    "watch": "tailwindcss --watch -i ./src/main/tailwind/styles.css -o ./src/main/resources/static/main.css"
   },
   "repository": {
     "type": "git",
